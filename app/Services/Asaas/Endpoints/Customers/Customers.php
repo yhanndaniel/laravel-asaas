@@ -4,6 +4,7 @@ namespace App\Services\Asaas\Endpoints\Customers;
 
 use App\Services\Asaas\Endpoints\BaseEndpoint;
 use App\Services\Asaas\Entities\Customer;
+use App\Services\Asaas\Requests\CreateCustomerRequest;
 use Illuminate\Support\Collection;
 
 class Customers extends BaseEndpoint
@@ -25,6 +26,17 @@ class Customers extends BaseEndpoint
             $this->asaasService
                 ->api
                 ->get('/customers/' . $id)
+                ->json(),
+            Customer::class
+        );
+    }
+
+    public function create(CreateCustomerRequest $request): Customer
+    {
+        return $this->transformOne(
+            $this->asaasService
+                ->api
+                ->post('/customers', $request->validated())
                 ->json(),
             Customer::class
         );

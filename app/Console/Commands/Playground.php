@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Services\Asaas\AsaasService;
 use App\Services\Asaas\Facades\Asaas;
+use App\Services\Asaas\Requests\CreateCustomerRequest;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -17,9 +18,9 @@ class Playground extends Command
     public function handle()
     {
 
-        $return = Asaas::customers()->getOne('cus_000005363809');
+        $createCustomer = new CreateCustomerRequest('José', '000000000', 'dRQoq@example.com');
 
-        ds($return);
+        ds($createCustomer->validated());
         return Command::SUCCESS;
     }
 }
