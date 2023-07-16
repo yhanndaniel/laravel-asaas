@@ -18,4 +18,15 @@ class Payments extends BaseEndpoint
             Payment::class
         );
     }
+
+    public function getOne(string $id): object
+    {
+        return $this->transformOne(
+            $this->asaasService
+                ->api
+                ->get('/payments/' . $id)
+                ->json(),
+            Payment::class
+        );
+    }
 }

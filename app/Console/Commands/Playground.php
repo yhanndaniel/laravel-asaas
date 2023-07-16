@@ -17,7 +17,7 @@ class Playground extends Command
     public function handle()
     {
 
-        $return = Asaas::payments()->get();
+        $return = Asaas::payments()->getOne('pay_3101282041890488');
 
         ds($return);
         return Command::SUCCESS;
