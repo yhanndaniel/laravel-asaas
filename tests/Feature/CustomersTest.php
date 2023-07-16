@@ -1,7 +1,7 @@
 <?php
 
 use App\Services\Asaas\Entities\Customer;
-use App\Services\Asaas\Facades\Asass;
+use App\Services\Asaas\Facades\Asaas;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
@@ -46,7 +46,7 @@ test('api_get_customers_works', function () {
         ])
                 ]);
 
-    $customers = Asass::customers()->get();
+    $customers = Asaas::customers()->get();
 
     expect($customers)
         ->toBeInstanceOf(Collection::class)

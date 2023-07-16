@@ -10,7 +10,7 @@ class Customers extends BaseEndpoint
     public function get(): Collection
     {
         return $this->transform(
-            $this->asassService
+            $this->asaasService
                 ->api
                 ->get('/customers')
                 ->json('data'),

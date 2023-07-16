@@ -2,16 +2,16 @@
 
 namespace App\Services\Asaas\Endpoints;
 
-use App\Services\Asaas\AsassService;
+use App\Services\Asaas\AsaasService;
 use Illuminate\Support\Collection;
 
 class BaseEndpoint
 {
-    protected AsassService $asassService;
+    protected AsaasService $asaasService;
 
     public function __construct()
     {
-        $this->asassService = new AsassService();
+        $this->asaasService = new AsaasService();
     }
 
     protected function transform(mixed $json, string $entity): Collection

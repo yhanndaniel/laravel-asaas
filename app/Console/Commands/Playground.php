@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Services\Asaas\AsassService;
-use App\Services\Asaas\Facades\Asass;
+use App\Services\Asaas\AsaasService;
+use App\Services\Asaas\Facades\Asaas;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -17,7 +17,7 @@ class Playground extends Command
     public function handle()
     {
 
-        $return = Asass::customers()->get();
+        $return = Asaas::customers()->get();
 
         ds($return);
         return Command::SUCCESS;

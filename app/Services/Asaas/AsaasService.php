@@ -7,10 +7,10 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
 /**
- * Asass Documentation Api Service
+ * Asaas Documentation Api Service
  * https://docs.asaas.com/reference/comece-por-aqui
  */
-class AsassService
+class AsaasService
 {
     use HasCustomers;
 
