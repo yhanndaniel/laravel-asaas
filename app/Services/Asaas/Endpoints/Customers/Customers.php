@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Services\Asaas\Endpoints;
+namespace App\Services\Asaas\Endpoints\Customers;
 
+use App\Services\Asaas\Endpoints\BaseEndpoint;
 use App\Services\Asaas\Entities\Customer;
 use Illuminate\Support\Collection;
 

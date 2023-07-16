@@ -2,7 +2,7 @@
 
 namespace App\Services\Asaas;
 
-use App\Services\Asaas\Endpoints\HasCustomers;
+use App\Services\Asaas\Endpoints\Customers\HasCustomers;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Asaas\Endpoints;
+namespace App\Services\Asaas\Endpoints\Customers;
 
 trait HasCustomers
 {
