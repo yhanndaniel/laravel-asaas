@@ -21,6 +21,6 @@ class AsaasService
         $this->api = Http::withHeaders([
             'access_token' => config('services.asaas.access_token'),
             'Content-Type' => 'application/json'
-         ])->baseUrl(config('services.asaas.base_url'));
+        ])->baseUrl(config('services.asaas.base_url'));
     }
 }

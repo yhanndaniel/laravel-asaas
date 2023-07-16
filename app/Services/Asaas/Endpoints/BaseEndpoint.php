@@ -14,10 +14,14 @@ class BaseEndpoint
         $this->asaasService = new AsaasService();
     }
 
-    protected function transform(mixed $json, string $entity): Collection
+    protected function transformMany(mixed $json, string $entity): Collection
     {
         return collect($json)
             ->map(fn ($customer) => new $entity($customer));
+    }
 
+    protected function transformOne(mixed $json, string $entity): object
+    {
+        return $json ? new $entity($json) : null;
     }
 }
