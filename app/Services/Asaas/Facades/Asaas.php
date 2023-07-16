@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static Customers customers()
+ * @method static Payments payments()
  */
 class Asaas extends Facade
 {

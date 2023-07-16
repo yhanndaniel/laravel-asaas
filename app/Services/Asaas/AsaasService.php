@@ -3,6 +3,7 @@
 namespace App\Services\Asaas;
 
 use App\Services\Asaas\Endpoints\Customers\HasCustomers;
+use App\Services\Asaas\Endpoints\Payments\HasPayments;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Http;
  */
 class AsaasService
 {
-    use HasCustomers;
+    use HasCustomers, HasPayments;
 
     public PendingRequest $api;
 
