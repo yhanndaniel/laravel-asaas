@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'asaas' => [
+        'access_token' => env('ASAAS_ACCESS_TOKEN'),
+        'base_url' => env('ASAAS_BASE_URL', 'https://sandbox.asaas.com/api/v3'),
+    ],
+
 ];

@@ -19,8 +19,8 @@ class AsaasService
     public function __construct()
     {
         $this->api = Http::withHeaders([
-            'access_token' => '$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAwNTkzMDE6OiRhYWNoX2UwMzg0YTExLTM2ZmUtNDQ1Yi1hNGQxLTFiYWI1NmZkODFjMg==',
+            'access_token' => config('services.asaas.access_token'),
             'Content-Type' => 'application/json'
-         ])->baseUrl('https://sandbox.asaas.com/api/v3');
+         ])->baseUrl(config('services.asaas.base_url'));
     }
 }
