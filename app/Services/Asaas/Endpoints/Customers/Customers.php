@@ -20,7 +20,7 @@ class Customers extends BaseEndpoint
         );
     }
 
-    public function getOne(string $id): object
+    public function getOne(string $id): Customer
     {
         return $this->transformOne(
             $this->asaasService

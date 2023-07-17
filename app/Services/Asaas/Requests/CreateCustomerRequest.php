@@ -2,12 +2,10 @@
 
 namespace App\Services\Asaas\Requests;
 
-use Illuminate\Support\Facades\Validator;
-
-class CreateCustomerRequest
+class CreateCustomerRequest extends BaseRequest
 {
     public string $name;
-    public ?string $cpfCnpj;
+    public string $cpfCnpj;
     public ?string $email;
     public ?string $phone;
     public ?string $mobilePhone;
@@ -24,31 +22,9 @@ class CreateCustomerRequest
     public ?string $observations;
     public ?string $groupName;
 
-    const NULLABLE_STRING = 'nullable|string';
-
-    const VALIDATION_RULES = [
-        'name' => 'required|string',
-        'cpfCnpj' => 'required|string',
-        'email' => self::NULLABLE_STRING,
-        'phone' => self::NULLABLE_STRING,
-        'mobilePhone' => self::NULLABLE_STRING,
-        'address' => self::NULLABLE_STRING,
-        'addressNumber' => self::NULLABLE_STRING,
-        'complement' => self::NULLABLE_STRING,
-        'province' => self::NULLABLE_STRING,
-        'postalCode' => self::NULLABLE_STRING,
-        'externalReference' => self::NULLABLE_STRING,
-        'notificationDisabled' => 'nullable|boolean',
-        'additionalEmails' => self::NULLABLE_STRING,
-        'municipalInscription' => self::NULLABLE_STRING,
-        'stateInscription' => self::NULLABLE_STRING,
-        'observations' => self::NULLABLE_STRING,
-        'groupName' => self::NULLABLE_STRING,
-    ];
-
     public function __construct(
         string $name,
-        ?string $cpfCnpj = null,
+        string $cpfCnpj,
         ?string $email = null,
         ?string $phone = null,
         ?string $mobilePhone = null,
@@ -84,14 +60,28 @@ class CreateCustomerRequest
         $this->groupName = $groupName;
     }
 
-    public function toArray(): array
+    const NULLABLE_STRING = 'nullable|string';
+    protected function validationRules($validationRules = [
+        'name' => 'required|string',
+        'cpfCnpj' => 'required|string',
+        'email' => self::NULLABLE_STRING,
+        'phone' => self::NULLABLE_STRING,
+        'mobilePhone' => self::NULLABLE_STRING,
+        'address' => self::NULLABLE_STRING,
+        'addressNumber' => self::NULLABLE_STRING,
+        'complement' => self::NULLABLE_STRING,
+        'province' => self::NULLABLE_STRING,
+        'postalCode' => self::NULLABLE_STRING,
+        'externalReference' => self::NULLABLE_STRING,
+        'notificationDisabled' => 'nullable|boolean',
+        'additionalEmails' => self::NULLABLE_STRING,
+        'municipalInscription' => self::NULLABLE_STRING,
+        'stateInscription' => self::NULLABLE_STRING,
+        'observations' => self::NULLABLE_STRING,
+        'groupName' => self::NULLABLE_STRING,
+    ]): array
     {
-        return get_object_vars($this);
-    }
-
-    public function validated()
-    {
-        return Validator::make($this->toArray(), self::VALIDATION_RULES)->validated();
+        return $validationRules;
     }
 
 }
