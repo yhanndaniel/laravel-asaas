@@ -12,4 +12,12 @@ class Interest
         $this->value = data_get($data, 'value');
         $this->type  = data_get($data, 'type');
     }
+
+    public function toJson()
+    {
+        return json_encode([
+            'value' => $this->value,
+            'type'  => $this->type
+        ]);
+    }
 }

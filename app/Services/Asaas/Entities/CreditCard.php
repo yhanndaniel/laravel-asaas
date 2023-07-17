@@ -14,4 +14,13 @@ class CreditCard
         $this->creditCardBrand  = data_get($data, 'creditCardBrand');
         $this->creditCardToken  = data_get($data, 'creditCardToken');
     }
+
+    public function toJson()
+    {
+        return json_encode([
+            'creditCardNumber' => $this->creditCardNumber,
+            'creditCardBrand'  => $this->creditCardBrand,
+            'creditCardToken'  => $this->creditCardToken,
+        ]);
+    }
 }

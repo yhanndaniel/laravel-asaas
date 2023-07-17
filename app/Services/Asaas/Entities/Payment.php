@@ -87,4 +87,49 @@ class Payment
         $this->refunds                  = data_get($data, 'refunds');
     }
 
+    public function toJson(): string
+    {
+        return json_encode([
+            'object' => $this->object,
+            'id'     => $this->id,
+            'dateCreated' => $this->dateCreated,
+            'customer' => $this->customer,
+            'paymentLink' => $this->paymentLink,
+            'value' => $this->value,
+            'netValue' => $this->netValue,
+            'originalValue' => $this->originalValue,
+            'interestValue' => $this->interestValue,
+            'description' => $this->description,
+            'billingType' => $this->billingType,
+            'confirmedDate' => $this->confirmedDate,
+            'creditCard' => $this->creditCard->toJson(),
+            'pixTransaction' => $this->pixTransaction,
+            'status' => $this->status,
+            'dueDate' => $this->dueDate,
+            'originalDueDate' => $this->originalDueDate,
+            'paymentDate' => $this->paymentDate,
+            'clientPaymentDate' => $this->clientPaymentDate,
+            'installmentNumber' => $this->installmentNumber,
+            'invoiceUrl' => $this->invoiceUrl,
+            'invoiceNumber' => $this->invoiceNumber,
+            'externalReference' => $this->externalReference,
+            'deleted' => $this->deleted,
+            'anticipated' => $this->anticipated,
+            'anticipable' => $this->anticipable,
+            'creditDate' => $this->creditDate,
+            'estimatedCreditDate' => $this->estimatedCreditDate,
+            'transactionReceiptUrl' => $this->transactionReceiptUrl,
+            'nossoNumero' => $this->nossoNumero,
+            'bankSlipUrl' => $this->bankSlipUrl,
+            'lastInvoiceViewedDate' => $this->lastInvoiceViewedDate,
+            'lastBankSlipViewedDate' => $this->lastBankSlipViewedDate,
+            'discount' => $this->discount->toJson(),
+            'fine' => $this->fine->toJson(),
+            'interest' => $this->interest->toJson(),
+            'postalService' => $this->postalService,
+            'custody' => $this->custody,
+            'refunds' => $this->refunds,
+        ]);
+    }
+
 }

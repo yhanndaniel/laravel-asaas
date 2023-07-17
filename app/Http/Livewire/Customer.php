@@ -7,14 +7,13 @@ use App\Services\Asaas\Facades\Asaas;
 use App\Services\Asaas\Requests\CreateCustomerRequest;
 use Livewire\Component;
 use WireUi\Traits\Actions;
+
 class Customer extends Component
 {
 
     use Actions;
 
     public ModelsCustomer $customerModel;
-
-    public $tasks = [];
 
     protected array $rules = [
         'customerModel.name' => 'required | string | max:255 | min:3',
@@ -42,8 +41,11 @@ class Customer extends Component
             return redirect()->to('payment/' . $hasUser->asaas_id);
         } else {
             $this->customerModel->save();
-            $customerRequest = new CreateCustomerRequest($this->customerModel->name,
-            $this->customerModel->cpfCnpj, $this->customerModel->email);
+            $customerRequest = new CreateCustomerRequest(
+                $this->customerModel->name,
+                $this->customerModel->cpfCnpj,
+                $this->customerModel->email
+            );
             $customerAsaas = Asaas::customers()->create($customerRequest);
             $this->customerModel->asaas_id = $customerAsaas->id;
             $this->customerModel->save();

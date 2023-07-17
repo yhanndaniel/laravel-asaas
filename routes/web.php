@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Customer;
+use App\Http\Livewire\Finish;
 use App\Http\Livewire\Payment;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Customer::class);
 Route::get('/payment/{customer_id}', Payment::class)->name('payment');
+Route::get('/finish/{payment_id}', Finish::class)->name('finish');

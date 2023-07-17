@@ -16,4 +16,14 @@ class Discount
         $this->dueDateLimitDays     = data_get($data, 'dueDateLimitDays');
         $this->type                 = data_get($data, 'type');
     }
+
+    public function toJson()
+    {
+        return json_encode([
+            'value' => $this->value,
+            'limitDate' => $this->limitDate,
+            'dueDateLimitDays' => $this->dueDateLimitDays,
+            'type' => $this->type
+        ]);
+    }
 }
