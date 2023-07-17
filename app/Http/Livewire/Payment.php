@@ -64,6 +64,6 @@ class Payment extends Component
         $this->paymentModel->assas_payment_payload = $payment->toJson();
         $this->paymentModel->save();
 
-        return redirect()->to('finish/' . $this->paymentModel->asaas_id);
+        return redirect()->to('finish/' . $this->paymentModel->asaas_id_payment);
     }
 }
