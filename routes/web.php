@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Customer;
 use App\Http\Livewire\Payment;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', Payment::class);
+Route::get('/', Customer::class);
