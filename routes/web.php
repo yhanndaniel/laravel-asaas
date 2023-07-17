@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Customer::class);
+Route::get('/payment/{customer_id}', Payment::class)->name('payment');
