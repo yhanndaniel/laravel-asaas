@@ -4,6 +4,7 @@ namespace App\Services\Asaas\Endpoints\Payments;
 
 use App\Services\Asaas\Endpoints\BaseEndpoint;
 use App\Services\Asaas\Entities\Payment;
+use App\Services\Asaas\Requests\CreatePaymentCreditCardRequest;
 use App\Services\Asaas\Requests\CreatePaymentRequest;
 use Illuminate\Support\Collection;
 
@@ -32,6 +33,17 @@ class Payments extends BaseEndpoint
     }
 
     public function create(CreatePaymentRequest $data): Payment
+    {
+        return $this->transformOne(
+            $this->asaasService
+                ->api
+                ->post('/payments', $data->validated())
+                ->json(),
+            Payment::class
+        );
+    }
+
+    public function createCreditCard(CreatePaymentCreditCardRequest $data): Payment
     {
         return $this->transformOne(
             $this->asaasService

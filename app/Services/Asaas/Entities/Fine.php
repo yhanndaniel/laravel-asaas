@@ -4,10 +4,10 @@ namespace App\Services\Asaas\Entities;
 
 class Fine
 {
-    public float $value;
+    public ?float $value;
     public ?string $type;
 
-    public function __construct(array $data)
+    public function __construct(?array $data)
     {
         $this->value = data_get($data, 'value');
         $this->type  = data_get($data, 'type');

@@ -15,6 +15,8 @@ class Payment
     public ?float $interestValue;
     public ?string $description;
     public string $billingType;
+    public ?string $confirmedDate;
+    public ?CreditCard $creditCard;
     public ?string $pixTransaction;
     public string $status;
     public ?string $dueDate;
@@ -55,6 +57,8 @@ class Payment
         $this->interestValue            = data_get($data, 'interestValue');
         $this->description              = data_get($data, 'description');
         $this->billingType              = data_get($data, 'billingType');
+        $this->confirmedDate            = data_get($data, 'confirmedDate');
+        $this->creditCard               = new CreditCard(data_get($data, 'creditCard'));
         $this->pixTransaction           = data_get($data, 'pixTransaction');
         $this->status                   = data_get($data, 'status');
         $this->dueDate                  = data_get($data, 'dueDate');

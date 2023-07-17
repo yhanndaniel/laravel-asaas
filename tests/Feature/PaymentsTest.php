@@ -1,12 +1,16 @@
 <?php
 
+use App\Services\Asaas\Entities\CreditCard;
 use App\Services\Asaas\Entities\Discount;
 use App\Services\Asaas\Entities\Fine;
 use App\Services\Asaas\Entities\Interest;
 use App\Services\Asaas\Entities\Payment;
 use App\Services\Asaas\Enums\BillingType;
 use App\Services\Asaas\Facades\Asaas;
+use App\Services\Asaas\Requests\CreatePaymentCreditCardRequest;
 use App\Services\Asaas\Requests\CreatePaymentRequest;
+use App\Services\Asaas\Requests\CreditCardHolderInfoRequest;
+use App\Services\Asaas\Requests\CreditCardRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
@@ -258,4 +262,96 @@ test('api_create_payment_works', function () {
         ->toBeInstanceOf(Fine::class)
         ->and($payment->interest)
         ->toBeInstanceOf(Interest::class);
+});
+
+test('api_create_payment_credit_card_works', function () {
+
+    Http::fake([
+        'https://sandbox.asaas.com/api/v3/payments' => Http::response([
+            'object' => 'payment',
+            'id' => 'pay_3657199349753446',
+            'dateCreated' => '2023-07-17',
+            'customer' => 'cus_000005363844',
+            'paymentLink' => null,
+            'value' => 100.0,
+            'netValue' => 97.52,
+            'originalValue' => null,
+            'interestValue' => null,
+            'description' => null,
+            'billingType' => 'CREDIT_CARD',
+            'confirmedDate' => '2023-07-17',
+            'creditCard' => [
+                'creditCardNumber' => '4479',
+                'creditCardBrand' => 'MASTERCARD',
+                'creditCardToken' => '41aaac25-e8ad-45b8-9e41-f3a67da4e532'
+            ],
+            'pixTransaction' => null,
+            'status' => 'CONFIRMED',
+            'dueDate' => '2023-07-17',
+            'originalDueDate' => '2023-07-17',
+            'paymentDate' => null,
+            'clientPaymentDate' => '2023-07-17',
+            'installmentNumber' => null,
+            'invoiceUrl' => 'https://sandbox.asaas.com/i/3657199349753446',
+            'invoiceNumber' => '03718164',
+            'externalReference' => null,
+            'deleted' => false,
+            'anticipated' => false,
+            'anticipable' => false,
+            'creditDate' => '2023-08-17',
+            'estimatedCreditDate' => '2023-08-17',
+            'transactionReceiptUrl' => 'https://sandbox.asaas.com/comprovantes/6248509193272957',
+            'nossoNumero' => null,
+            'bankSlipUrl' => null,
+            'lastInvoiceViewedDate' => null,
+            'lastBankSlipViewedDate' => null,
+            'postalService' => false,
+            'custody' => null,
+            'refunds' => null
+        ])
+    ]);
+
+    $paymentCreditCardRequest = new CreatePaymentCreditCardRequest(
+        'cus_000005363844',
+        BillingType::CREDIT_CARD,
+        100,
+        '2023-07-17',
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        new CreditCardRequest('Ian Julio Vieira', '5158180524594479', '12', '2024', '243'),
+        new CreditCardHolderInfoRequest('Ian Julio Vieira', 'email@gmail.com', '46429026868', '72602204', '12', '61993005225', null, null),
+        null,
+        false,
+        '177.158.235.44'
+    );
+
+    $payment = Asaas::payments()->createCreditCard($paymentCreditCardRequest);
+
+    expect($payment)
+        ->toBeInstanceOf(Payment::class)
+        ->and($payment->object)
+        ->toBe('payment')
+        ->and($payment->dateCreated)
+        ->toBe('2023-07-17')
+        ->and($payment->customer)
+        ->toBe('cus_000005363844')
+        ->and($payment->value)
+        ->toBe(100.0)
+        ->and($payment->netValue)
+        ->toBe(97.52)
+        ->and($payment->confirmedDate)
+        ->toBe('2023-07-17')
+        ->and($payment->creditCard)
+        ->toBeInstanceOf(CreditCard::class)
+        ->and($payment->creditCard->creditCardNumber)
+        ->toBe('4479')
+        ->and($payment->status)
+        ->toBe('CONFIRMED');
+
 });
